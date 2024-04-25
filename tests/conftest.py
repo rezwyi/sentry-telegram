@@ -1,8 +1,7 @@
-# coding: utf-8
 import os
 
 
-os.environ.setdefault('DB', 'postgres')
+os.environ.setdefault("DB", "postgres")
 pytest_plugins = [
-    'sentry.utils.pytest',
+    "sentry.utils.pytest",
 ]
