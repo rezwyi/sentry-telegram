@@ -6,8 +6,6 @@ import responses
 from sentry.models import Rule
 from sentry.plugins.base import Notification
 from sentry.testutils import PluginTestCase
-
-
 from sentry_telegram.plugin import TelegramNotificationsPlugin
 
 

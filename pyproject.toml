@@ -1,0 +1,4 @@
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests"
+pythonpath = ["/app", "/etc/sentry", "/usr/src/sentry"]
+python_files = ["tests/*.py"]
