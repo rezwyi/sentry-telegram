@@ -1,18 +1,18 @@
-import pytest
+from functools import cached_property
 
-from exam import fixture
-import json
+import pytest
 import responses
 from sentry.models import Rule
 from sentry.plugins.base import Notification
 from sentry.testutils import PluginTestCase
-from sentry_telegram.plugin import TelegramNotificationsPlugin
+from sentry.utils import json
+from sentry_telegram.plugin import TelegramPlugin
 
 
 class BaseTest(PluginTestCase):
-    @fixture
+    @cached_property
     def plugin(self):
-        return TelegramNotificationsPlugin()
+        return TelegramPlugin()
 
     def test_conf_key(self):
         assert self.plugin.conf_key == "sentry_telegram_py3"
