@@ -1,4 +1,4 @@
-FROM getsentry/sentry:24.4.1
+FROM getsentry/sentry:24.1.0
 
 WORKDIR /app
 
