@@ -1,6 +1,7 @@
 import logging
-from collections import defaultdict
+import sentry
 
+from collections import defaultdict
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from sentry.http import safe_urlopen
@@ -8,11 +9,13 @@ from sentry.plugins.bases import notify
 from sentry.utils.safe import safe_execute
 from sentry_plugins.base import CorePluginMixin
 
-from . import __doc__ as package_doc
-from . import __version__
+
+DESCRIPTION = """
+Get notified of Sentry alerts via Telegram.
+"""
 
 
-class TelegramNotificationsOptionsForm(notify.NotificationConfigurationForm):
+class TelegramConfigurationForm(notify.NotificationConfigurationForm):
     api_origin = forms.CharField(
         label=_("Telegram API origin"),
         widget=forms.TextInput(attrs={"placeholder": "https://api.telegram.org"}),
@@ -46,23 +49,30 @@ class TelegramNotificationsOptionsForm(notify.NotificationConfigurationForm):
     )
 
 
-class TelegramNotificationsPlugin(CorePluginMixin, notify.NotificationPlugin):
+class TelegramPlugin(CorePluginMixin, notify.NotificationPlugin):
     title = "Telegram Notifications Python3"
     slug = "sentry_telegram_py3"
-    description = package_doc
-    version = __version__
-    author = "Vladislav Bukhman"
-    author_url = "https://github.com/vortland/sentry-telegram"
-    resource_links = [
-        ("Source", "https://github.com/vortland/sentry-telegram"),
-    ]
-
+    description = DESCRIPTION
+    version = sentry.VERSION
     conf_key = "sentry_telegram_py3"
     conf_title = title
-
-    project_conf_form = TelegramNotificationsOptionsForm
-
+    project_conf_form = TelegramConfigurationForm
     logger = logging.getLogger("sentry.plugins.sentry_telegram_py3")
+
+    resource_links = [
+        (
+            "Documentation",
+            "https://github.com/rezwyi/sentry-telegram/blob/master/README.md",
+        ),
+        ("Report Issue", "https://github.com/rezwyi/sentry-telegram/issues"),
+        (
+            "View Source",
+            "https://github.com/rezwyi/sentry-telegram",
+        ),
+        ("Telegram", "https://telegram.org/"),
+        ("Telegram Document", "https://core.telegram.org/bots#3-how-do-i-create-a-bot"),
+        ("Get Telegram Bot Token", "https://core.telegram.org/bots/features#botfather"),
+    ]
 
     def is_configured(self, project, **kwargs):
         return bool(
