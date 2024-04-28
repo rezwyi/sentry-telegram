@@ -6,6 +6,7 @@ RUN pip install \
     fixtures \
     pytest \
     pytest-django \
+    pytest-xdist \
     responses \
     selenium
 

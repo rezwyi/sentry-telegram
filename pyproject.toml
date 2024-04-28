@@ -1,3 +1,3 @@
 [tool.pytest.ini_options]
 python_files = "test_*.py sentry/testutils/*"
-addopts = "--tb=short -p no:celery -p no:cov --nomigrations"
+addopts = "--tb=short --nomigrations -p no:celery -p no:cov"
