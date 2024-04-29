@@ -1,4 +1,5 @@
-FROM getsentry/sentry:24.1.0
+ARG SENTRY_VERSION=24.1.0
+FROM getsentry/sentry:${SENTRY_VERSION}
 
 WORKDIR /app
 
@@ -8,7 +9,8 @@ RUN pip install \
     pytest-django \
     pytest-xdist \
     responses \
-    selenium
+    selenium \
+    time_machine
 
 COPY . .
 
