@@ -3,4 +3,17 @@ services:
     image: redis:latest
     restart: always
     ports:
-      - "6379:6379"
+      - 6379:6379
+  snuba:
+    image: getsentry/snuba:latest
+    restart: always
+    ports:
+      - 1218:1218
+      - 1219:1219
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
