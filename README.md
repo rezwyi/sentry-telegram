@@ -10,7 +10,6 @@ Presented plugin tested with the following self-hosted Sentry versions:
 ```shell
 vi sentry/enhance-image.sh #see https://develop.sentry.dev/self-hosted/#configuration
 
-apt-get update
-apt-get install -y git
+apt-get update && apt install -y git
 pip install git+https://github.com/rezwyi/sentry-telegram.git@v24.3.0
 ```
