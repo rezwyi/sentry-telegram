@@ -66,22 +66,6 @@ class BaseTest(PluginTestCase):
             "chat_id": "123",
         }
 
-    @staticmethod
-    def assert_notification_helper(request_call, message_text):
-        assert request_call == dict(
-            allow_redirects=False,
-            method="POST",
-            headers={"Content-Type": "application/json"},
-            url="https://api.telegram.org/botapi:token/sendMessage",
-            json={
-                "text": message_text,
-                "parse_mode": "Markdown",
-                "chat_id": "123",
-            },
-            timeout=30,
-            verify=True,
-        )
-
     def test_get_empty_receivers_list(self):
         self.plugin.set_option("receivers", "", self.project)
         assert self.plugin.get_receivers(self.project) == []
