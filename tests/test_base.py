@@ -22,6 +22,19 @@ class BaseTest(PluginTestCase):
         responses.add(
             responses.POST, "https://api.telegram.org/botapi:token/sendMessage"
         )
+
+        event = self.store_event(
+            project_id=self.project.id,
+            data={
+                "message": "Hello world",
+                "level": "error",
+                "platform": "python",
+            },
+        )
+
+        rule = Rule.objects.create(project=self.project, label="my rule")
+        notification = Notification(event=event, rule=rule)
+
         self.plugin.set_option("api_origin", "https://api.telegram.org", self.project)
         self.plugin.set_option("receivers", "123", self.project)
         self.plugin.set_option("api_token", "api:token", self.project)
@@ -30,18 +43,6 @@ class BaseTest(PluginTestCase):
             "*[Sentry]* {project_name} {tag[level]}: {title}\n{message}\n{url}",
             self.project,
         )
-
-        event = self.store_event(
-            data={
-                "message": "Hello world",
-                "level": "error",
-                "platform": "python",
-            },
-            project_id=self.project.id,
-        )
-        rule = Rule.objects.create(project=self.project, label="my rule")
-
-        notification = Notification(event=event, rule=rule)
 
         with self.options({"system.url-prefix": "http://example.com"}):
             self.plugin.notify(notification)
