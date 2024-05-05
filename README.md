@@ -13,3 +13,9 @@ vi sentry/enhance-image.sh #see https://develop.sentry.dev/self-hosted/#configur
 apt-get update && apt install -y git
 pip install git+https://github.com/rezwyi/sentry-telegram.git@v24.3.0
 ```
+
+## Testing
+
+```shell
+./run-tests.sh --version 24.3.0
+```
