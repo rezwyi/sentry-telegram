@@ -63,8 +63,10 @@ function prepare_test_environment() {
 }
 
 function run_test_container() {
-  local dockerfile=$(mktemp)
+  local dockerfile
   local imagetag="test-sentry-telegram-${version}:latest"
+
+  dockerfile="$(mktemp)"
   
   cat <<DOCKERFILE > "$dockerfile"
   FROM getsentry/sentry:${version}
