@@ -64,7 +64,7 @@ function prepare_test_environment() {
 
 function run_test_container() {
   local dockerfile
-  local imagetag="test-sentry-telegram-${version}:latest"
+  local imagetag="test-sentry-telegram:${version}"
 
   dockerfile="$(mktemp)"
   
