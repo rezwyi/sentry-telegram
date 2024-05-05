@@ -1,0 +1,40 @@
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+  snuba:
+    image: getsentry/snuba:latest
+    restart: always
+    ports:
+      - 1218:1218
+      - 1219:1219
+    environment:
+      KAFKA_HOST: kafka
+      CLICKHOUSE_HOST: clickhouse
+      REDIS_HOST: redis
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    restart: always
+    ports:
+      - 8123:8123
+  kafka:
+    image: bitnami/kafka:latest
+    restart: always
+    ports:
+      - 9092:9092
+      - 9093:9093
+    environment:
+      KAFKA_CFG_PROCESS_ROLES: controller,broker
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@kafka-server:9093 
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
