@@ -85,7 +85,7 @@ function run_test_container() {
 DOCKERFILE
   
   log "Building test image…"
-  $d rmi "$imagetag"
+  $d rmi "$imagetag" || true
   $d build --no-cache --file "$dockerfile" --tag "$imagetag" --quiet .
   [[ $? -eq 0 ]] && log "Test image build successful."
   
@@ -95,7 +95,7 @@ DOCKERFILE
 }
 
 function cleanup() {
-  log "Cleaning up"
+  log "Cleaning up."
   $dc down
 }
 
