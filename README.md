@@ -7,6 +7,7 @@ Presented plugin tested with the following self-hosted Sentry versions:
 1. 24.4.0
 1. 24.4.1
 1. 24.4.2
+1. 24.5.0
 
 ## Install
 
@@ -14,11 +15,11 @@ Presented plugin tested with the following self-hosted Sentry versions:
 vi sentry/enhance-image.sh #see https://develop.sentry.dev/self-hosted/#configuration
 
 apt-get update && apt install -y git
-pip install git+https://github.com/rezwyi/sentry-telegram.git@v24.4.2
+pip install git+https://github.com/rezwyi/sentry-telegram.git@v24.5.0
 ```
 
 ## Testing
 
 ```shell
-./run-tests.sh --version 24.4.2
+./run-tests.sh --version 24.5.0
 ```
