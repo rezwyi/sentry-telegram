@@ -9,20 +9,6 @@ from sentry.testutils.pytest.sentry import get_default_silo_mode_for_test_cases
 
 pytest_plugins = ["sentry.testutils.pytest"]
 
-
-# XXX: The below code is vendored code from https://github.com/utgwkk/pytest-github-actions-annotate-failures
-# so that we can add support for pytest_rerunfailures
-# retried tests will no longer be annotated in GHA
-#
-# Reference:
-# https://docs.pytest.org/en/latest/writing_plugins.html#hookwrapper-executing-around-other-hooks
-# https://docs.pytest.org/en/latest/writing_plugins.html#hook-function-ordering-call-example
-# https://docs.pytest.org/en/stable/reference.html#pytest.hookspec.pytest_runtest_makereport
-#
-# Inspired by:
-# https://github.com/pytest-dev/pytest/blob/master/src/_pytest/terminal.py
-
-
 @pytest.fixture(autouse=True)
 def unclosed_files():
     fds = frozenset(psutil.Process().open_files())
