@@ -3,12 +3,9 @@
 Plugin for self-hosted Sentry which allows sending notification via [Telegram](https://telegram.org/) messenger.
 
 Presented plugin tested with the following self-hosted Sentry versions:
-1. 24.3.0
-1. 24.4.0
-1. 24.4.1
-1. 24.4.2
-1. 24.5.0
-1. 24.5.1
+1. 24.3.x
+1. 24.4.x
+1. 24.5.x
 
 ## Install
 
@@ -22,5 +19,5 @@ pip install git+https://github.com/rezwyi/sentry-telegram.git@v24.5.1
 ## Testing
 
 ```shell
-./run-tests.sh --version 24.5.1
+./run-tests.sh --version v24.5.1
 ```

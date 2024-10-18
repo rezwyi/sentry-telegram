@@ -73,7 +73,7 @@ function run_test_container() {
   WORKDIR /app
   RUN pip install \
       fixtures \
-      pytest==6.2.5 \
+      pytest \
       pytest-django \
       pytest-xdist \
       responses \
