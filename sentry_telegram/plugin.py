@@ -1,14 +1,13 @@
 import logging
-import sentry
-
 from collections import defaultdict
+
+import sentry
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from sentry.http import safe_urlopen
 from sentry.plugins.bases import notify
 from sentry.utils.safe import safe_execute
 from sentry_plugins.base import CorePluginMixin
-
 
 DESCRIPTION = """
 Get notified of Sentry alerts via Telegram.
@@ -37,7 +36,6 @@ class TelegramConfigurationForm(notify.NotificationConfigurationForm):
             "Enter receivers IDs (one per line). Personal messages, group chats and channels also available."
         ),
     )
-
     message_template = forms.CharField(
         label=_("Message template"),
         widget=forms.Textarea(attrs={"class": "span4"}),
@@ -193,5 +191,4 @@ class TelegramPlugin(CorePluginMixin, notify.NotificationPlugin):
                 payload,
                 chat_id,
                 message_thread_id,
-                _with_transaction=False,
             )
